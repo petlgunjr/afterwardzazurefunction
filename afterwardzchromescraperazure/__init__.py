@@ -10,7 +10,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
   logging.info('Python HTTP trigger function processed a request.')
   try:
     req_body = req.get_json()
-    location = client.geocode(req_body["Location"])
+    location = client.geocode(req_body["Location"], fields=["school"])
     return json.dumps(location)
   except ValueError:
     return func.HttpResponse(
