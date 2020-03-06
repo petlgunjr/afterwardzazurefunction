@@ -4,15 +4,15 @@ from geocodio import GeocodioClient
 import azure.functions as func
 import pyodbc
 
-conn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=wardzwall.database.windows.net.aftwall;DATABASE=afterwardz;UID=apiTEST;PWD=Te$This1OuttatHere;")
-
-cursor = conn.cursor()
-results = cursor.execute("SELECT location FROM Geodata")
-logging.info(results)
 
 client = GeocodioClient("fb531bb1bc80c53e5f0a88b5ff5efc30fbebc15")
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+  conn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=wardzwall.database.windows.net.aftwall;DATABASE=afterwardz;UID=apiTEST;PWD=Te$This1OuttatHere;")
+
+  cursor = conn.cursor()
+  results = cursor.execute("SELECT location FROM Geodata")
+  logging.info(results)
   logging.info('Python HTTP trigger function processed a request.')
   try:
     req_body = req.get_json()
